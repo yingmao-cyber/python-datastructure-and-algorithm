@@ -76,6 +76,22 @@ class LinkedArray(object):
             print(temp)
             temp = temp["next"]
 
+    def reverse_list(self):
+        prev = None
+        n = self.list
+        while n is not None:
+            # {data: 1, ref: {data: 2, ref: {data: 3, ref: None}}}
+            next = n['next']
+            print(f'next: {next}')
+            n['next'] = prev
+            print(f'prev: {prev}')
+            prev = n
+            print(f'current n {prev}')
+            n = next
+            # print(f'n: {n}')
+        print(f'prev: {prev}')
+        self.list = prev
+
     def print_result(self):
         return f'list: {self.list}'
 
@@ -176,6 +192,17 @@ class LinkedList:
         print("item not found")
         return False
 
+    def reverse_linkedlist(self):
+        prev = None
+        n = self.start_node
+        while n is not None:
+            # {data: 1, ref: {data: 2, ref: {data: 3, ref: None}}}
+            next = n.ref
+            n.ref = prev
+            prev = n
+            n = next
+        self.start_node = prev
+
 
 def test_linked_array():
     linkedarray = LinkedArray()
@@ -188,16 +215,19 @@ def test_linked_array():
     linkedarray.insert_value_with_index(5, 2)
     print(f'insert new node at index 2: \n{linkedarray.print_result()}')
     linkedarray.insert_value_with_index(6, 4)
-    print(f'insert new node at final: \n{linkedarray.print_result()}')
-    linkedarray.delete_element_with_value(6)
-    print(f'delete node at final: \n{linkedarray.print_result()}')
-    linkedarray.delete_element_with_value(2)
-    print(f'delete the second node: \n{linkedarray.print_result()}')
-    linkedarray.delete_element_with_value(4)
-    print(f'delete the first node: \n{linkedarray.print_result()}\n')
-    print("traverse list")
-    linkedarray.insert_value_at_end(8)
-    linkedarray.traverse_list()
+    # print(f'insert new node at final: \n{linkedarray.print_result()}')
+    # linkedarray.delete_element_with_value(6)
+    # print(f'delete node at final: \n{linkedarray.print_result()}')
+    # linkedarray.delete_element_with_value(2)
+    # print(f'delete the second node: \n{linkedarray.print_result()}')
+    # linkedarray.delete_element_with_value(4)
+    # print(f'delete the first node: \n{linkedarray.print_result()}\n')
+    # print("traverse list")
+    # linkedarray.insert_value_at_end(8)
+    # linkedarray.traverse_list()
+    print('')
+    linkedarray.reverse_list()
+    print(f'reversed list: {linkedarray.print_result()}')
 
 def test_linked_list():
     linkedlist = LinkedList()
@@ -206,7 +236,10 @@ def test_linked_list():
     linkedlist.insert_at_start(4)
     linkedlist.insert_at_index(2, 3)
     linkedlist.traverse_list()
+    linkedlist.reverse_linkedlist()
+    print('')
+    linkedlist.traverse_list()
 
 if __name__ == "__main__":
-    # test_linked_array()
-    test_linked_list()
+    test_linked_array()
+    # test_linked_list()
