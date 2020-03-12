@@ -81,14 +81,29 @@ class LinkedArray(object):
         n = self.list
         while n is not None:
             # {data: 1, ref: {data: 2, ref: {data: 3, ref: None}}}
+            # next1 = {data: 2, ref: {data: 3, ref: None}}
+            # next2 = {data: 3, ref: None}
+            # next3 = None
             next = n['next']
             print(f'next: {next}')
+
+            # n['next']1 = None
+            # n['next']2 = {data:1, ref:None}
+            # n['next']3 = {data: 2, ref: {data: 1, ref: None}}
             n['next'] = prev
             print(f'prev: {prev}')
+
+            # prev = n = {data:1, ref:None}
+            # prev2 = n = {data: 2, ref: {data: 1, ref: None}}
+            # prev3 = n = {data: 3, ref: {data: 2, ref: {data: 1, ref: None}}}
             prev = n
             print(f'current n {prev}')
+
+            # n = next = {data: 2, ref: {data: 3, ref: None}}
+            # n2 = {data: 3, ref: None}
+            # n = None
             n = next
-            # print(f'n: {n}')
+            print(f'n: {n}\n')
         print(f'prev: {prev}')
         self.list = prev
 
@@ -229,6 +244,15 @@ def test_linked_array():
     linkedarray.reverse_list()
     print(f'reversed list: {linkedarray.print_result()}')
 
+def test_linked_array_reverse():
+    linkedarray = LinkedArray()
+    linkedarray.insert_value_at_end(1)
+    linkedarray.insert_value_at_end(2)
+    linkedarray.insert_value_at_end(3)
+    print('')
+    linkedarray.reverse_list()
+    print(f'reversed list: {linkedarray.print_result()}')
+
 def test_linked_list():
     linkedlist = LinkedList()
     linkedlist.insert_at_start(1)
@@ -241,5 +265,5 @@ def test_linked_list():
     linkedlist.traverse_list()
 
 if __name__ == "__main__":
-    test_linked_array()
+    test_linked_array_reverse()
     # test_linked_list()
